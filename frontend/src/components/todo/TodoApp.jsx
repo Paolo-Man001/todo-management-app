@@ -66,14 +66,13 @@ class LoginComponent extends Component {
 
    loginClick() {
       // DEFAULT HARDCODED AUTH = username: "john doe" , password: "password"
+      // this.setState({ showSuccessMessage: true });
+      this.props.history.push("/welcome");
       if ( this.state.username === "john doe" && this.state.password === "password" ) {
-         this.setState({ showSuccessMessage: true });
-         this.setState({ isLoginFail: false });
-         console.log("SUCCESS!");
+         // this.setState({ isLoginFail: false });
       } else {
-         this.setState({ showSuccessMessage: false });
          this.setState({ isLoginFail: true });
-         console.log("FAIL");
+         this.setState({ showSuccessMessage: false });
       }
    } // END Method: loginClick()
 
