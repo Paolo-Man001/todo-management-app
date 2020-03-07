@@ -15,6 +15,7 @@ class TodoApp extends Component {
                             <Route path="/login" component={ LoginComponent }/>
                             <Route path="/welcome/:name" component={ WelcomeComponent }/>
                             <Route path="/todo" component={ ListTodoComponent }/>
+                            <Route path="/logout" component={ LogoutComponent }/>
                             <Route component={ ErrorComponent }/>
                          </Switch>
                       </div>
@@ -66,13 +67,24 @@ class FooterComponent extends Component {
    render() {
       return (
           <footer className="footer mt-auto py-3">
-             <div className="container">
-                <span className="text-muted">Place sticky footer content here.</span>
-             </div>
+                <span className="text-muted">&copy; 2020 Todo Mngt App</span>
           </footer>
       );
    }
 }  // END Component-Child: FooterComponent
+
+
+//-------LogoutComponent-------//
+class LogoutComponent extends Component {
+   render() {
+      return (
+             <div className="container">
+                <h1>You are Logged Out</h1>
+                <p>Thank you, and have a great day!</p>
+             </div>
+      );
+   }
+}  // END Component-Child: LogoutComponent
 
 
 //-------ListTodoComponent-------//
