@@ -8,7 +8,9 @@ button {
   padding: 15px 30px;
   width: 100px;
 }
-
+table, th, td {
+  border: 1px solid black;
+}
 
 .App-header {
   background-color: #282c34;

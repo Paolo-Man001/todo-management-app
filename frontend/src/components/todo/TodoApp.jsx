@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
 
 class TodoApp extends Component {
    render() {
@@ -29,11 +29,11 @@ class ListTodoComponent extends Component {
       this.state = {
          todos:
              [
-                { id: 1, description: 'Learn to be an expert of React' },
-                { id: 2, description: 'Climb Everest' },
-                { id: 3, description: 'Ski in Switzerland' },
-                { id: 4, description: 'Swim with the Great White Shark' },
-                { id: 5, description: 'Clean my room' }
+                { id: 1, description: 'Learn to be an expert of React', done: false, targetdate: new Date() },
+                { id: 2, description: 'Climb Everest', done: false, targetdate: new Date() },
+                { id: 3, description: 'Ski in Switzerland', done: false, targetdate: new Date() },
+                { id: 4, description: 'Swim with the Great White Shark', done: false, targetdate: new Date() },
+                { id: 5, description: 'Clean my room', done: false, targetdate: new Date() }
              ]
       }
    }
@@ -48,6 +48,8 @@ class ListTodoComponent extends Component {
                    <tr>
                       <th>id</th>
                       <th>description</th>
+                      <th>Target Date</th>
+                      <th>Complete</th>
                    </tr>
                 </thead>
                 <tbody>
@@ -58,6 +60,8 @@ class ListTodoComponent extends Component {
                               <tr key={ `10${ todo.id }` }>
                                  <td>{ todo.id }</td>
                                  <td>{ todo.description }</td>
+                                 <td>{ todo.targetdate.toDateString() }</td>
+                                 <td>{ todo.done.toString() }</td>
                               </tr>
                       )
                    }
@@ -74,7 +78,12 @@ class WelcomeComponent extends Component {
    render() {
       // 'this.props.match.params.name' is used to get the Path Parameter Value('username' from login)
       //    to display the name. Parameter is part of the Props.
-      return <h1>Welcome, { this.props.match.params.name }!</h1>
+      return (
+          <div>
+             <h3>Welcome, { this.props.match.params.name }.</h3><br/>
+             You can manage your Todos <Link to={ "/todo" }>here</Link>.
+          </div>
+      );
    }
 }  // END Component-Child: WelcomeComponent
 
