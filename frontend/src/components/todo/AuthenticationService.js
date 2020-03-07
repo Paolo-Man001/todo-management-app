@@ -5,10 +5,16 @@
 
 class AuthenticationService {
 
-   // CALL this method on Successful User Login
+   // CALL when user loginClick() :
    registerSuccessfulLogin( username, password ) {
       console.log('registerSuccessfulLogin');
       sessionStorage.setItem('authenticatedUser', username);
+   }
+
+
+   // CALL from Navbar Logout :
+   logout() {
+      sessionStorage.removeItem('authenticatedUser');
    }
 }
 
