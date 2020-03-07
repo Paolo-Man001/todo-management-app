@@ -11,6 +11,7 @@ class TodoApp extends Component {
                       <Route path="/" exact component={ LoginComponent }/>
                       <Route path="/login" component={ LoginComponent }/>
                       <Route path="/welcome/:name" component={ WelcomeComponent }/>
+                      <Route path="/todo" component={ ListTodoComponent }/>
                       <Route component={ ErrorComponent }/>
                    </Switch>
                 </>
@@ -21,12 +22,59 @@ class TodoApp extends Component {
 }  // END Component-Parent: TodoApp
 
 
+//-------ListTodoComponent-------//
+class ListTodoComponent extends Component {
+   constructor( props ) {
+      super(props);
+      this.state = {
+         todos:
+             [
+                { id: 1, description: 'Learn to be an expert of React' },
+                { id: 2, description: 'Climb Everest' },
+                { id: 3, description: 'Ski in Switzerland' },
+                { id: 4, description: 'Swim with the Great White Shark' },
+                { id: 5, description: 'Clean my room' }
+             ]
+      }
+   }
+
+   render() {
+
+      return (
+          <div>
+             <h1>List of Todos</h1>
+             <table>
+                <thead>
+                   <tr>
+                      <th>id</th>
+                      <th>description</th>
+                   </tr>
+                </thead>
+                <tbody>
+                   {
+                      this.state.todos.map
+                      (
+                          todo =>
+                              <tr key={ `10${ todo.id }` }>
+                                 <td>{ todo.id }</td>
+                                 <td>{ todo.description }</td>
+                              </tr>
+                      )
+                   }
+                </tbody>
+             </table>
+          </div>
+      );
+   }
+}  // END Component-Child: ListTodoComponent
+
+
 //-------WelcomeComponent-------//
 class WelcomeComponent extends Component {
    render() {
       // 'this.props.match.params.name' is used to get the Path Parameter Value('username' from login)
       //    to display the name. Parameter is part of the Props.
-      return <h1>Welcome, {this.props.match.params.name}!</h1>
+      return <h1>Welcome, { this.props.match.params.name }!</h1>
    }
 }  // END Component-Child: WelcomeComponent
 
