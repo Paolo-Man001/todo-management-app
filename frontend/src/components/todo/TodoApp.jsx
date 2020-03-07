@@ -6,12 +6,14 @@ class TodoApp extends Component {
       return (
           <div className={ "TodoApp" }>
              <Router>
-                <Switch>
-                   <Route path="/" exact component={ LoginComponent }/>
-                   <Route path="/login" component={ LoginComponent }/>
-                   <Route path="/welcome" component={ WelcomeComponent }/>
-                   <Route component={ ErrorComponent }/>
-                </Switch>
+                <>
+                   <Switch>
+                      <Route path="/" exact component={ LoginComponent }/>
+                      <Route path="/login" component={ LoginComponent }/>
+                      <Route path="/welcome/:name" component={ WelcomeComponent }/>
+                      <Route component={ ErrorComponent }/>
+                   </Switch>
+                </>
              </Router>
           </div>
       );
@@ -22,7 +24,9 @@ class TodoApp extends Component {
 //-------WelcomeComponent-------//
 class WelcomeComponent extends Component {
    render() {
-      return <h1>Welcome!</h1>
+      // 'this.props.match.params.name' is used to get the Path Parameter Value('username' from login)
+      //    to display the name. Parameter is part of the Props.
+      return <h1>Welcome, {this.props.match.params.name}!</h1>
    }
 }  // END Component-Child: WelcomeComponent
 
@@ -76,8 +80,12 @@ class LoginComponent extends Component {
    loginClick() {
       // DEFAULT HARDCODED AUTH = username: "john doe" , password: "password"
       // this.setState({ showSuccessMessage: true });
-      this.props.history.push("/welcome");
+
       if ( this.state.username === "john doe" && this.state.password === "password" ) {
+
+         // username has to be added for the <Route> Path Param (path="/welcome/:name")
+         this.props.history.push(`/welcome/${ this.state.username }`);
+
          // this.setState({ isLoginFail: false });
       } else {
          this.setState({ isLoginFail: true });
