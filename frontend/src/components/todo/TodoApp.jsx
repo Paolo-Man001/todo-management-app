@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
+import AuthenticationService from "./AuthenticationService";
 
 class TodoApp extends Component {
    render() {
@@ -37,23 +38,23 @@ class HeaderComponent extends Component {
                 <span className="navbar-toggler-icon"></span>
              </button>
              <div className="collapse navbar-collapse" id="navbarNav">
-                <ul className="navbar-nav">
-                   <li className="nav-item active">
+                <ul className="navbar-nav mr-auto">
+                   <li className="nav-item">
                       <Link className="nav-link" to="/welcome">Home <span className="sr-only">(current)</span></Link>
                    </li>
                    <li className="nav-item">
                       <Link className="nav-link" to="/todo">Todos</Link>
                    </li>
                 </ul>
+                <ul className="navbar-nav">
+                   <li className="nav-item">
+                      <Link className="nav-link" to="/">Login</Link>
+                   </li>
+                   <li className="nav-item">
+                      <Link className="nav-link" to="/logout">Logout</Link>
+                   </li>
+                </ul>
              </div>
-             <ul className="navbar-nav justify-content-end">
-                <li className="nav-item">
-                   <Link className="nav-link" to="/">Login</Link>
-                </li>
-                <li className="nav-item">
-                   <Link className="nav-link" to="/logout">Logout</Link>
-                </li>
-             </ul>
           </nav>
       );
    }
@@ -173,13 +174,13 @@ class LoginComponent extends Component {
 
    render() {
       return (
-          <div className="col-md-4 offset-4">
+          <div >
              <h1 className="mb-4">Login</h1>
              {/*<ShowInvalidCredentials isLoginFail={ this.state.isLoginFail }/>*/ }
-             { this.state.isLoginFail && <div className="alert alert-warning">Invalid Credentials</div> }
              {/*{ this.state.showSuccessMessage && <h3>Login Successful!!!</h3> }*/ }
 
-             <form>
+             <form className="form-signin">
+                { this.state.isLoginFail && <div className="alert alert-warning">Invalid Credentials</div> }
                 <label htmlFor="inputEmail" className="sr-only">Email address</label>
                 <input type="text" name="username" onChange={ this.handleChange } className="form-control" placeholder="User name" required autoFocus/>
                 <label htmlFor="inputPassword" className="sr-only">Password</label>
@@ -209,6 +210,8 @@ class LoginComponent extends Component {
       // this.setState({ showSuccessMessage: true });
 
       if ( this.state.username === "john doe" && this.state.password === "password" ) {
+         // Authentication service:
+         AuthenticationService.registerSuccessfulLogin(this.state.username, this.state.password);
 
          // username has to be added for the <Route> Path Param (path="/welcome/:name")
          this.props.history.push(`/welcome/${ this.state.username }`);
