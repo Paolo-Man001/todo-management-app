@@ -8,17 +8,15 @@ class TodoApp extends Component {
              <Router>
                 <>
                    <HeaderComponent/>
-                   <main role="main" className="flex-shrink-0 ">
-                      <div className="container todo-feature">
-                         <Switch>
-                            <Route path="/" exact component={ LoginComponent }/>
-                            <Route path="/login" component={ LoginComponent }/>
-                            <Route path="/welcome/:name" component={ WelcomeComponent }/>
-                            <Route path="/todo" component={ ListTodoComponent }/>
-                            <Route path="/logout" component={ LogoutComponent }/>
-                            <Route component={ ErrorComponent }/>
-                         </Switch>
-                      </div>
+                   <main role="main" className="container todo-feature flex-shrink-0 ">
+                      <Switch>
+                         <Route path="/" exact component={ LoginComponent }/>
+                         <Route path="/login" component={ LoginComponent }/>
+                         <Route path="/welcome/:name" component={ WelcomeComponent }/>
+                         <Route path="/todo" component={ ListTodoComponent }/>
+                         <Route path="/logout" component={ LogoutComponent }/>
+                         <Route component={ ErrorComponent }/>
+                      </Switch>
                    </main>
                    <FooterComponent/>
                 </>
@@ -67,7 +65,7 @@ class FooterComponent extends Component {
    render() {
       return (
           <footer className="footer mt-auto py-3">
-                <span className="text-muted">&copy; 2020 Todo Mngt App</span>
+             <span className="text-muted">&copy; 2020 Todo Mngt App</span>
           </footer>
       );
    }
@@ -78,10 +76,10 @@ class FooterComponent extends Component {
 class LogoutComponent extends Component {
    render() {
       return (
-             <div className="container">
-                <h1>You are Logged Out</h1>
-                <p>Thank you, and have a great day!</p>
-             </div>
+          <div className="container">
+             <h1>You are Logged Out</h1>
+             <p>Thank you, and have a great day!</p>
+          </div>
       );
    }
 }  // END Component-Child: LogoutComponent
@@ -107,11 +105,10 @@ class ListTodoComponent extends Component {
 
       return (
           <div>
-             <h1>List of Todos</h1>
+             <h1 className="mb-3">List of Todos</h1>
              <table className="table table-bordered">
                 <thead className="thead-dark">
                    <tr>
-                      <th>id</th>
                       <th>description</th>
                       <th>Target Date</th>
                       <th>Complete</th>
@@ -123,7 +120,6 @@ class ListTodoComponent extends Component {
                       (
                           todo =>
                               <tr key={ `10${ todo.id }` }>
-                                 <td>{ todo.id }</td>
                                  <td>{ todo.description }</td>
                                  <td>{ todo.targetdate.toDateString() }</td>
                                  <td>{ todo.done.toString() }</td>
@@ -145,7 +141,7 @@ class WelcomeComponent extends Component {
       //    to display the name. Parameter is part of the Props.
       return (
           <div>
-             <h3>Welcome, { this.props.match.params.name }.</h3><br/>
+             <h1>Welcome, { this.props.match.params.name }.</h1><br/>
              You can manage your Todos <Link to={ "/todo" }>here</Link>.
           </div>
       );
@@ -177,13 +173,13 @@ class LoginComponent extends Component {
 
    render() {
       return (
-          <div className="col-md-6 offset-3">
+          <div className="col-md-4 offset-4">
+             <h1 className="mb-4">Login</h1>
              {/*<ShowInvalidCredentials isLoginFail={ this.state.isLoginFail }/>*/ }
-             { this.state.isLoginFail && <h3>Invalid Credentials</h3> }
-             { this.state.showSuccessMessage && <h3>Login Successful!!!</h3> }
+             { this.state.isLoginFail && <div className="alert alert-warning">Invalid Credentials</div> }
+             {/*{ this.state.showSuccessMessage && <h3>Login Successful!!!</h3> }*/ }
 
              <form>
-
                 <label htmlFor="inputEmail" className="sr-only">Email address</label>
                 <input type="text" name="username" onChange={ this.handleChange } className="form-control" placeholder="User name" required autoFocus/>
                 <label htmlFor="inputPassword" className="sr-only">Password</label>
@@ -193,7 +189,6 @@ class LoginComponent extends Component {
                 {/*User Name: <input value={ this.state.username } type="text" name="username" onChange={ this.handleChange }/>*/ }
                 {/*Password: <input value={ this.state.password } type="password" name="password" onChange={ this.handleChange }/>*/ }
                 <button className="btn btn-lg btn-primary btn-block mt-3" onClick={ this.loginClick }>Login</button>
-                <p className="mt-5 mb-3 text-muted">&copy; 2020</p>
              </form>
           </div>
       );
@@ -226,22 +221,5 @@ class LoginComponent extends Component {
    } // END Method: loginClick()
 }// END Component-Child:  loginComponent
 
-
-//-------ShowInvalidCredentials-------//
-// function ShowInvalidCredentials( props ) {
-//    if ( props.isLoginFail ) {
-//       return <h3>Invalid Credentials</h3>;
-//    }
-//    return <></>;
-// }
-
-
-//-------ShowIValidCredentials-------//
-// function ShowIValidCredentials( props ) {
-//    if ( props.showSuccessMessage ) {
-//       return <h3>Login Successful!!!</h3>;
-//    }
-//    return <></>;
-// }
 
 export default TodoApp
