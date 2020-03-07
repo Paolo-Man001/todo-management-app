@@ -1,14 +1,17 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 class TodoApp extends Component {
    render() {
       return (
           <div className={ "TodoApp" }>
              <Router>
-                <Route path="/" exact component={ LoginComponent }/>
-                <Route path="/login" component={ LoginComponent }/>
-                <Route path="/welcome" component={ WelcomeComponent }/>
+                <Switch>
+                   <Route path="/" exact component={ LoginComponent }/>
+                   <Route path="/login" component={ LoginComponent }/>
+                   <Route path="/welcome" component={ WelcomeComponent }/>
+                   <Route component={ ErrorComponent }/>
+                </Switch>
              </Router>
           </div>
       );
@@ -22,6 +25,12 @@ class WelcomeComponent extends Component {
       return <h1>Welcome!</h1>
    }
 }  // END Component-Child: WelcomeComponent
+
+
+//-------ErrorComponent-------//
+function ErrorComponent() {
+   return <h3>An Error Occurred. I don't know what to do. Don't be angry.</h3>;
+}  // END Component-Child: ErrorComponent
 
 
 //-------LoginComponent-------//
@@ -45,8 +54,8 @@ class LoginComponent extends Component {
           <div>
              {/*<ShowInvalidCredentials isLoginFail={ this.state.isLoginFail }/>*/ }
              { this.state.isLoginFail && <h3>Invalid Credentials</h3> }
-             {/*<ShowIValidCredentials showSuccessMessage={ this.state.showSuccessMessage }/>*/ }
              { this.state.showSuccessMessage && <h3>Login Successful!!!</h3> }
+
              User Name: <input value={ this.state.username } type="text" name="username" onChange={ this.handleChange }/>
              Password: <input value={ this.state.password } type="password" name="password" onChange={ this.handleChange }/>
              <button onClick={ this.loginClick }>Login</button>
@@ -75,7 +84,6 @@ class LoginComponent extends Component {
          this.setState({ showSuccessMessage: false });
       }
    } // END Method: loginClick()
-
 }// END Component-Child:  loginComponent
 
 
