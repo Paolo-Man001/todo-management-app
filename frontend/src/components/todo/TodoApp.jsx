@@ -7,19 +7,72 @@ class TodoApp extends Component {
           <div className={ "TodoApp" }>
              <Router>
                 <>
-                   <Switch>
-                      <Route path="/" exact component={ LoginComponent }/>
-                      <Route path="/login" component={ LoginComponent }/>
-                      <Route path="/welcome/:name" component={ WelcomeComponent }/>
-                      <Route path="/todo" component={ ListTodoComponent }/>
-                      <Route component={ ErrorComponent }/>
-                   </Switch>
+                   <HeaderComponent/>
+                   <main role="main" className="flex-shrink-0 ">
+                      <div className="container todo-feature">
+                         <Switch>
+                            <Route path="/" exact component={ LoginComponent }/>
+                            <Route path="/login" component={ LoginComponent }/>
+                            <Route path="/welcome/:name" component={ WelcomeComponent }/>
+                            <Route path="/todo" component={ ListTodoComponent }/>
+                            <Route component={ ErrorComponent }/>
+                         </Switch>
+                      </div>
+                   </main>
+                   <FooterComponent/>
                 </>
              </Router>
           </div>
       );
    }
 }  // END Component-Parent: TodoApp
+
+
+//-------HeaderComponent-------//
+class HeaderComponent extends Component {
+   render() {
+      return (
+          <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+             <Link className="navbar-brand" to="/">Todo Mngt App</Link>
+             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span className="navbar-toggler-icon"></span>
+             </button>
+             <div className="collapse navbar-collapse" id="navbarNav">
+                <ul className="navbar-nav">
+                   <li className="nav-item active">
+                      <Link className="nav-link" to="/welcome">Home <span className="sr-only">(current)</span></Link>
+                   </li>
+                   <li className="nav-item">
+                      <Link className="nav-link" to="/todo">Todos</Link>
+                   </li>
+                </ul>
+             </div>
+             <ul className="navbar-nav justify-content-end">
+                <li className="nav-item">
+                   <Link className="nav-link" to="/">Login</Link>
+                </li>
+                <li className="nav-item">
+                   <Link className="nav-link" to="/logout">Logout</Link>
+                </li>
+             </ul>
+          </nav>
+      );
+   }
+}  // END Component-Child: HeaderComponent
+
+
+//-------FooterComponent-------//
+class FooterComponent extends Component {
+   render() {
+      return (
+          <footer className="footer mt-auto py-3">
+             <div className="container">
+                <span className="text-muted">Place sticky footer content here.</span>
+             </div>
+          </footer>
+      );
+   }
+}  // END Component-Child: FooterComponent
 
 
 //-------ListTodoComponent-------//
@@ -43,8 +96,8 @@ class ListTodoComponent extends Component {
       return (
           <div>
              <h1>List of Todos</h1>
-             <table>
-                <thead>
+             <table className="table table-bordered">
+                <thead className="thead-dark">
                    <tr>
                       <th>id</th>
                       <th>description</th>
@@ -99,7 +152,7 @@ class LoginComponent extends Component {
    constructor( props ) {
       super(props);
       this.state = {
-         username: 'user name',
+         username: '',
          password: '',
          isLoginFail: false,
          showSuccessMessage: false
@@ -112,14 +165,24 @@ class LoginComponent extends Component {
 
    render() {
       return (
-          <div>
+          <div className="col-md-6 offset-3">
              {/*<ShowInvalidCredentials isLoginFail={ this.state.isLoginFail }/>*/ }
              { this.state.isLoginFail && <h3>Invalid Credentials</h3> }
              { this.state.showSuccessMessage && <h3>Login Successful!!!</h3> }
 
-             User Name: <input value={ this.state.username } type="text" name="username" onChange={ this.handleChange }/>
-             Password: <input value={ this.state.password } type="password" name="password" onChange={ this.handleChange }/>
-             <button onClick={ this.loginClick }>Login</button>
+             <form>
+
+                <label htmlFor="inputEmail" className="sr-only">Email address</label>
+                <input type="text" name="username" onChange={ this.handleChange } className="form-control" placeholder="User name" required autoFocus/>
+                <label htmlFor="inputPassword" className="sr-only">Password</label>
+                <input type="password" name="password" onChange={ this.handleChange } className="form-control" placeholder="Password" required/>
+
+
+                {/*User Name: <input value={ this.state.username } type="text" name="username" onChange={ this.handleChange }/>*/ }
+                {/*Password: <input value={ this.state.password } type="password" name="password" onChange={ this.handleChange }/>*/ }
+                <button className="btn btn-lg btn-primary btn-block mt-3" onClick={ this.loginClick }>Login</button>
+                <p className="mt-5 mb-3 text-muted">&copy; 2020</p>
+             </form>
           </div>
       );
    }

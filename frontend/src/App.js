@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import './bootstrap.css'
 import TodoApp from "./components/todo/TodoApp";
 
 function App() {
