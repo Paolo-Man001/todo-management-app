@@ -4,10 +4,14 @@
 * */
 
 class AuthenticationService {
+   constructor(authUser) {
+      this.authUser = authUser;
+   }
 
    // CALL when user loginClick() :
    registerSuccessfulLogin( username, password ) {
-      console.log('registerSuccessfulLogin');
+      this.authUser = username;
+      // console.log('registerSuccessfulLogin');
       sessionStorage.setItem('authenticatedUser', username);
    }
 
@@ -15,13 +19,12 @@ class AuthenticationService {
    // CALL from Navbar Logout :
    logout() {
       sessionStorage.removeItem('authenticatedUser');
+      alert("You are logging out...");
    }
 
    isUserLoggedIn() {
       let user = sessionStorage.getItem('authenticatedUser');
       return user !== null;   // If User is found - return true, Else, return - false
-      // if ( user === null ) return false;
-      // return true;
    }
 }
 
