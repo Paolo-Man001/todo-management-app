@@ -16,6 +16,13 @@ class AuthenticationService {
    logout() {
       sessionStorage.removeItem('authenticatedUser');
    }
+
+   isUserLoggedIn() {
+      let user = sessionStorage.getItem('authenticatedUser');
+      return user !== null;   // If User is found - return true, Else, return - false
+      // if ( user === null ) return false;
+      // return true;
+   }
 }
 
 

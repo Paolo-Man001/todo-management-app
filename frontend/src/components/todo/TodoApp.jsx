@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Link, Route, Switch, withRouter } from 'react-router-dom';
 import AuthenticationService from "./AuthenticationService";
 
 class TodoApp extends Component {
@@ -8,7 +8,8 @@ class TodoApp extends Component {
           <div className={ "TodoApp" }>
              <Router>
                 <>
-                   <HeaderComponent/>
+                   {/*<HeaderComponent/>*/ }
+                   <HeaderWithRouter/>
                    <main role="main" className="container todo-feature flex-shrink-0 ">
                       <Switch>
                          <Route path="/" exact component={ LoginComponent }/>
@@ -31,6 +32,9 @@ class TodoApp extends Component {
 //-------HeaderComponent-------//
 class HeaderComponent extends Component {
    render() {
+      const isUserLoggedIn = AuthenticationService.isUserLoggedIn(); // checks for True or False (if user is logged-in or not)
+      // console.log(isUserLoggedIn);
+
       return (
           <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
              <Link className="navbar-brand" to="/">Todo Mngt App</Link>
@@ -39,26 +43,19 @@ class HeaderComponent extends Component {
              </button>
              <div className="collapse navbar-collapse" id="navbarNav">
                 <ul className="navbar-nav mr-auto">
-                   <li className="nav-item">
-                      <Link className="nav-link" to="/welcome">Home <span className="sr-only">(current)</span></Link>
-                   </li>
-                   <li className="nav-item">
-                      <Link className="nav-link" to="/todo">Todos</Link>
-                   </li>
+                   { isUserLoggedIn && <li className="nav-item"><Link className="nav-link" to="/welcome">Home</Link></li> }
+                   { isUserLoggedIn && <li className="nav-item"><Link className="nav-link" to="/todo">Todos</Link></li> }
                 </ul>
                 <ul className="navbar-nav">
-                   <li className="nav-item">
-                      <Link className="nav-link" to="/">Login</Link>
-                   </li>
-                   <li className="nav-item">
-                      <Link className="nav-link" to="/logout" onClick={AuthenticationService.logout}>Logout</Link>
-                   </li>
+                   { !isUserLoggedIn && <li className="nav-item"><Link className="nav-link" to="/">Login</Link></li> }
+                   { isUserLoggedIn && <li className="nav-item"><Link className="nav-link" to="/logout" onClick={ AuthenticationService.logout }>Logout</Link></li> }
                 </ul>
              </div>
           </nav>
       );
    }
 }  // END Component-Child: HeaderComponent
+const HeaderWithRouter = withRouter(HeaderComponent); // withRouter() updates Navbar accordingly to AuthenticationService.isUserLoggedIn()
 
 
 //-------FooterComponent-------//
@@ -118,13 +115,12 @@ class ListTodoComponent extends Component {
                 <tbody>
                    {
                       this.state.todos.map
-                      (
-                          todo =>
-                              <tr key={ `10${ todo.id }` }>
-                                 <td>{ todo.description }</td>
-                                 <td>{ todo.targetdate.toDateString() }</td>
-                                 <td>{ todo.done.toString() }</td>
-                              </tr>
+                      (todo =>
+                          <tr key={ `10${ todo.id }` }>
+                             <td>{ todo.description }</td>
+                             <td>{ todo.targetdate.toDateString() }</td>
+                             <td>{ todo.done.toString() }</td>
+                          </tr>
                       )
                    }
                 </tbody>
@@ -174,7 +170,7 @@ class LoginComponent extends Component {
 
    render() {
       return (
-          <div >
+          <div>
              <h1 className="mb-4">Login</h1>
              {/*<ShowInvalidCredentials isLoginFail={ this.state.isLoginFail }/>*/ }
              {/*{ this.state.showSuccessMessage && <h3>Login Successful!!!</h3> }*/ }
