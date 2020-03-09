@@ -4,18 +4,21 @@ import HelloWorldService from "../../api/todo/HelloWorldService";
 class LandingComponent extends Component {
    constructor( props ) {
       super(props);
+      this.state = {
+         helloMessage: ''
+      };
+
       this.getWelcomeMessage = this.getWelcomeMessage.bind(this);
+      this.handleSuccessResponse = this.handleSuccessResponse.bind(this);
    }
 
    render() {
       return (
           <div className="jumbotron main-banner">
              <h1 className="display-4">Manage Todos your way...</h1>
-             <p className="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+             <p className="lead display-2">{ this.state.helloMessage }</p>
              <hr className="my-4"/>
-             <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
              <div>
-
                 <button className="btn btn-primary btn-lg"
                         onClick={ this.getWelcomeMessage }>Click for 'Hello'
                 </button>
@@ -27,7 +30,11 @@ class LandingComponent extends Component {
    getWelcomeMessage() {
       // console.log('Welcome!');
       HelloWorldService.executeHelloWorldService()
-          .then(res => console.log(res));
+          .then(res => this.handleSuccessResponse(res));
+   }
+
+   handleSuccessResponse( res ) {
+      this.setState({ helloMessage: res.data })
    }
 }  // END Component-Child: LandingComponent
 
