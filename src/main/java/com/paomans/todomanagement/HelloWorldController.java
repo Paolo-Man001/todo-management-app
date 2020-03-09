@@ -27,6 +27,7 @@ public class HelloWorldController {
    // Path-variable(../../{name}) is also known as Path-parameter, like in React
    @GetMapping(path = "/hello-world/path-variable/{name}")
    public HelloWorldBean helloWorldPathVariable(@PathVariable String name) {
+//      throw new RuntimeException("Runtime EXCEPTION!");
       return new HelloWorldBean(String.format("Hello, %s", name));
    }
 }
