@@ -29,12 +29,18 @@ class LandingComponent extends Component {
 
    getWelcomeMessage() {
       // console.log('Welcome!');
-      HelloWorldService.executeHelloWorldService()
+      // HelloWorldService.executeHelloWorldService()
+      //     .then(res => this.handleSuccessResponse(res));
+
+      HelloWorldService.executeHelloWorldBeanService()
           .then(res => this.handleSuccessResponse(res));
    }
 
    handleSuccessResponse( res ) {
-      this.setState({ helloMessage: res.data })
+      // this.setState({ helloMessage: res.data })
+
+      console.log(res.data);
+      this.setState({ helloMessage: res.data.message })
    }
 }  // END Component-Child: LandingComponent
 

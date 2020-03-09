@@ -6,6 +6,11 @@ class HelloWorldService {
       // console.log('Executed HelloWorldService!');
       return axios.get('http://localhost:8081/hello-world');
    }
+
+   executeHelloWorldBeanService() {
+      // console.log('Executed HelloWorldService!');
+      return axios.get('http://localhost:8081/hello-world-bean');
+   }
 }
 
 

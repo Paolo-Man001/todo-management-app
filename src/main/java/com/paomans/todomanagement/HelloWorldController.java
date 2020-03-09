@@ -21,7 +21,7 @@ public class HelloWorldController {
 
    @GetMapping(path = "/hello-world-bean")
    public HelloWorldBean helloWorldBean() {
-      return new HelloWorldBean("Hello World!");
+      return new HelloWorldBean("Hello World! ...From Bean");
    }
 
    // Path-variable(../../{name}) is also known as Path-parameter, like in React
