@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import HelloWorldService from "../../api/todo/HelloWorldService";
 
 class LandingComponent extends Component {
    constructor( props ) {
@@ -24,7 +25,9 @@ class LandingComponent extends Component {
    }
 
    getWelcomeMessage() {
-      console.log('Welcome!');
+      // console.log('Welcome!');
+      HelloWorldService.executeHelloWorldService()
+          .then(res => console.log(res));
    }
 }  // END Component-Child: LandingComponent
 
