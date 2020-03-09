@@ -10,6 +10,7 @@ class AuthenticationService {
 
    // CALL when user loginClick() :
    registerSuccessfulLogin( username, password ) {
+      // Assign the username to instance-variable authUser
       this.authUser = username;
       // console.log('registerSuccessfulLogin');
       sessionStorage.setItem('authenticatedUser', username);

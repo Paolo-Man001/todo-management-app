@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import HelloWorldService from "../../api/todo/HelloWorldService";
+import AuthenticationService from "./AuthenticationService";
 
 class LandingComponent extends Component {
    constructor( props ) {
@@ -32,13 +33,15 @@ class LandingComponent extends Component {
       // HelloWorldService.executeHelloWorldService()
       //     .then(res => this.handleSuccessResponse(res));
 
-      HelloWorldService.executeHelloWorldBeanService()
+      // HelloWorldService.executeHelloWorldBeanService()
+      //     .then(res => this.handleSuccessResponse(res));
+
+      HelloWorldService.executeHelloWorldPathVariableService(AuthenticationService.authUser)
           .then(res => this.handleSuccessResponse(res));
    }
 
    handleSuccessResponse( res ) {
       // this.setState({ helloMessage: res.data })
-
       console.log(res.data);
       this.setState({ helloMessage: res.data.message })
    }

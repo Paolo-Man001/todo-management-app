@@ -11,6 +11,12 @@ class HelloWorldService {
       // console.log('Executed HelloWorldService!');
       return axios.get('http://localhost:8081/hello-world-bean');
    }
+
+   ///hello-world/path-variable/{name}
+   executeHelloWorldPathVariableService(name) {
+      // console.log('Executed HelloWorldService!');
+      return axios.get(`http://localhost:8081/hello-world/path-variable/${name}`);   // !!Template string must be used.
+   }
 }
 
 
