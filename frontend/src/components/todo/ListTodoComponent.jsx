@@ -1,18 +1,36 @@
 import React, { Component } from "react";
+import TodoDataService from "../../api/todo/TodoDataService";
+import AuthenticationService from "./AuthenticationService";
 
 class ListTodoComponent extends Component {
    constructor( props ) {
       super(props);
       this.state = {
+
          todos:
              [
-                { id: 1, description: 'Learn to be an expert of React', done: false, targetdate: new Date() },
-                { id: 2, description: 'Climb Everest', done: false, targetdate: new Date() },
-                { id: 3, description: 'Ski in Switzerland', done: false, targetdate: new Date() },
-                { id: 4, description: 'Swim with the Great White Shark', done: false, targetdate: new Date() },
-                { id: 5, description: 'Clean my room', done: false, targetdate: new Date() }
+                // { id: 1, description: 'Learn to be an expert of React', done: false, targetdate: new Date() },
+                // { id: 2, description: 'Climb Everest', done: false, targetdate: new Date() },
+                // { id: 3, description: 'Ski in Switzerland', done: false, targetdate: new Date() },
+                // { id: 4, description: 'Swim with the Great White Shark', done: false, targetdate: new Date() },
+                // { id: 5, description: 'Clean my room', done: false, targetdate: new Date() }
              ]
       }
+   }
+
+   componentDidMount() {
+
+      let username = AuthenticationService.getLoggedInUserName();
+
+      // TodoDataService.retrieveAllTodos('User One')
+      TodoDataService.retrieveAllTodos(username)
+          .then(res => {
+             console.log(res.data);
+             this.setState({
+                todos: res.data
+             })
+          });
+
    }
 
    render() {
@@ -34,7 +52,7 @@ class ListTodoComponent extends Component {
                       (todo =>
                           <tr key={ `10${ todo.id }` }>
                              <td>{ todo.description }</td>
-                             <td>{ todo.targetdate.toDateString() }</td>
+                             <td>{ todo.targetDate }</td>
                              <td>{ todo.done.toString() }</td>
                           </tr>
                       )

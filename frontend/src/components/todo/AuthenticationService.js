@@ -4,7 +4,7 @@
 * */
 
 class AuthenticationService {
-   constructor(authUser) {
+   constructor( authUser ) {
       this.authUser = authUser;
    }
 
@@ -26,6 +26,12 @@ class AuthenticationService {
    isUserLoggedIn() {
       let user = sessionStorage.getItem('authenticatedUser');
       return user !== null;   // If User is found - return true, Else, return - false
+   }
+
+   getLoggedInUserName() {
+      let user = sessionStorage.getItem('authenticatedUser');
+      if ( user === null ) return '';
+      return true;
    }
 }
 

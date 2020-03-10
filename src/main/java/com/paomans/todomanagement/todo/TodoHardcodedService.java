@@ -12,10 +12,10 @@ public class TodoHardcodedService {
    private static int idCounter = 0;
 
    static {
-      todos.add(new Todo(++idCounter, "User One", "Learn chacha", new Date(), false));
-      todos.add(new Todo(++idCounter, "User Two", "Learn Angular", new Date(), false));
-      todos.add(new Todo(++idCounter, "User Three", "Learn Microservices", new Date(), false));
-      todos.add(new Todo(++idCounter, "User Four", "Learn Spanish", new Date(), false));
+      todos.add(new Todo(++idCounter, "john doe", "Learn chacha", new Date(), false));
+      todos.add(new Todo(++idCounter, "john doe", "Learn Angular", new Date(), false));
+      todos.add(new Todo(++idCounter, "john doe", "Learn Microservices", new Date(), false));
+      todos.add(new Todo(++idCounter, "john doe", "Learn Spanish", new Date(), false));
    }
 
    public List<Todo> findAll() {
