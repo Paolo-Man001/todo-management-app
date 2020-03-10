@@ -1,4 +1,4 @@
-package com.paomans.todomanagement;
+package com.paomans.todomanagement.helloworld;
 
 public class HelloWorldBean {
    private String message;

@@ -23,7 +23,7 @@ class LandingComponent extends Component {
              <hr className="my-4"/>
              <div>
 
-                { this.state.errorMessage && <div className="alert alert-danger" role="alert">{this.state.errorMessage}</div> }
+                { this.state.errorMessage && <div className="alert alert-danger" role="alert">{ this.state.errorMessage }</div> }
                 <button className="btn btn-primary btn-lg"
                         onClick={ this.getWelcomeMessage }>Click for 'Hello'
                 </button>
@@ -47,8 +47,12 @@ class LandingComponent extends Component {
 
    handleSuccessResponse( res ) {
       // this.setState({ helloMessage: res.data })
-      console.log(res.data);
-      this.setState({ helloMessage: res.data.message })
+      // console.log(res.data);
+      if ( AuthenticationService.isUserLoggedIn() ) {
+         this.setState({ helloMessage: res.data.message })
+      } else {
+         this.setState({ helloMessage: 'Hello there!' })
+      }
    }
 
    handleError( error ) {

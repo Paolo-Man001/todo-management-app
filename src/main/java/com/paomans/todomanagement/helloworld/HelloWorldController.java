@@ -1,4 +1,4 @@
-package com.paomans.todomanagement;
+package com.paomans.todomanagement.helloworld;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
