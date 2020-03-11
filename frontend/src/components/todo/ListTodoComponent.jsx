@@ -4,6 +4,7 @@ import AuthenticationService from "./AuthenticationService";
 
 class ListTodoComponent extends Component {
    constructor( props ) {
+      console.log('CALL: constructor()');
       super(props);
       this.state = {
 
@@ -18,10 +19,22 @@ class ListTodoComponent extends Component {
       }
    }
 
+   //-- React lifecycle methods: --
+   componentWillUnmount() {
+      console.log('CALL: componentWillUnmount()');
+   } // END: componentWillUnmount()
+
+   shouldComponentUpdate( nextProps, nextState, nextContext ) {
+      console.log('CALL: shouldComponentUpdate');
+      console.log('CALL: shouldComponentUpdate : ' + nextProps);
+      console.log('CALL: shouldComponentUpdate : ' + nextState);
+      console.log('CALL: shouldComponentUpdate : ' + nextContext);
+      return false;
+   }
+
    componentDidMount() {
-
+      console.log('CALL: componentDidMount()');
       let username = AuthenticationService.getLoggedInUserName();
-
       // TodoDataService.retrieveAllTodos('User One')
       TodoDataService.retrieveAllTodos(username)
           .then(res => {
@@ -30,11 +43,11 @@ class ListTodoComponent extends Component {
                 todos: res.data
              })
           });
+   } // END componentDidMount()
 
-   }
 
    render() {
-
+      console.log('CALL: render()');
       return (
           <div>
              <h1 className="mb-3">List of Todos</h1>
@@ -61,8 +74,8 @@ class ListTodoComponent extends Component {
              </table>
           </div>
       );
-   }
-}
+   } // render()
+} // END Class: ListTodoComponent
 
 
 export default ListTodoComponent
