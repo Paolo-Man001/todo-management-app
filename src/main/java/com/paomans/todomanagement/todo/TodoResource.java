@@ -23,4 +23,6 @@ public class TodoResource {
    public List<Todo> getAllTodos(@PathVariable String username) {
       return todoService.findAll();
    }
+
+
 }
