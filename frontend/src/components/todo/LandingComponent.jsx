@@ -16,6 +16,7 @@ class LandingComponent extends Component {
    }
 
    render() {
+
       return (
           <div className="jumbotron main-banner">
              <h1 className="display-4">Manage Todos your way...</h1>
@@ -33,6 +34,7 @@ class LandingComponent extends Component {
    }
 
    getWelcomeMessage() {
+      let username = AuthenticationService.getLoggedInUserName();
       // console.log('Welcome!');
       // HelloWorldService.executeHelloWorldService()
       //     .then(res => this.handleSuccessResponse(res));
@@ -40,7 +42,7 @@ class LandingComponent extends Component {
       // HelloWorldService.executeHelloWorldBeanService()
       //     .then(res => this.handleSuccessResponse(res));
 
-      HelloWorldService.executeHelloWorldPathVariableService(AuthenticationService.authUser)
+      HelloWorldService.executeHelloWorldPathVariableService(username)
           .then(res => this.handleSuccessResponse(res))
           .catch(error => this.handleError(error));
    }

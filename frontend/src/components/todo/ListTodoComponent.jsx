@@ -9,14 +9,12 @@ class ListTodoComponent extends Component {
       this.state = {
 
          todos:
-             [
-                // { id: 1, description: 'Learn to be an expert of React', done: false, targetDate: new Date() },
-                // { id: 2, description: 'Climb Everest', done: false, targetDate: new Date() },
-                // { id: 3, description: 'Ski in Switzerland', done: false, targetDate: new Date() },
-                // { id: 4, description: 'Swim with the Great White Shark', done: false, targetDate: new Date() },
-                // { id: 5, description: 'Clean my room', done: false, targetDate: new Date() }
-             ]
-      }
+             [],
+         message: ''
+      };
+
+      this.deleteTodoClicked = this.deleteTodoClicked.bind(this);
+      this.refreshTodos = this.refreshTodos.bind(this);
    }
 
    //-- React lifecycle methods: --
@@ -32,30 +30,50 @@ class ListTodoComponent extends Component {
    // }
 
    componentDidMount() {
-      // console.log('CALL: componentDidMount()');
+      this.refreshTodos();
+   } // END componentDidMount()
+
+
+   deleteTodoClicked( id ) {
+      // get the username from AuthenticationService:
       let username = AuthenticationService.getLoggedInUserName();
-      // TodoDataService.retrieveAllTodos('User One')
+      // console.log(id + ":" + username);
+
+      TodoDataService.deleteTodoById(id, username)
+          .then(res => {
+             this.setState({ message: `You deleted, todo "${ id }"` });
+             this.refreshTodos();
+          });
+
+   } // End of deleteTodoClicked()
+
+
+   refreshTodos() {
+      // Return Username:
+      let username = AuthenticationService.getLoggedInUserName();
+
       TodoDataService.retrieveAllTodos(username)
           .then(res => {
-             console.log(res.data);
+             // console.log(res.data);
              this.setState({
                 todos: res.data
              })
           });
-   } // END componentDidMount()
-
+   }
 
    render() {
       // console.log('CALL: render()');
       return (
           <div>
              <h1 className="mb-3">List of Todos</h1>
+             { this.state.message && <div className="alert alert-success">{ this.state.message }</div> }
              <table className="table table-bordered">
                 <thead className="thead-dark">
                    <tr>
                       <th>description</th>
                       <th>Target Date</th>
                       <th>Complete</th>
+                      <th></th>
                    </tr>
                 </thead>
                 <tbody>
@@ -66,6 +84,10 @@ class ListTodoComponent extends Component {
                              <td>{ todo.description }</td>
                              <td>{ todo.targetDate }</td>
                              <td>{ todo.done.toString() }</td>
+                             <td>
+                                <button className="btn btn-outline-danger" onClick={ () => this.deleteTodoClicked(todo.id) }>Delete</button>
+                             </td>
+                             {/*<td><button className="btn btn-outline-danger">&#10060;</button></td>*/ }
                           </tr>
                       )
                    }
