@@ -66,6 +66,7 @@ class ListTodoComponent extends Component {
       let username = AuthenticationService.getLoggedInUserName();
       console.log("UPDATING : " + id + " : " + username);
 
+      // Redirect by using URL into Component (TodoComponent.jsx)
       this.props.history.push(`/todos/${ id }`);
 
       // TodoDataService.deleteTodoById(id, username)
