@@ -20,8 +20,6 @@ class LoginComponent extends Component {
       return (
           <div>
              <h1 className="mb-4">Login</h1>
-             {/*<ShowInvalidCredentials isLoginFail={ this.state.isLoginFail }/>*/ }
-             {/*{ this.state.showSuccessMessage && <h3>Login Successful!!!</h3> }*/ }
 
              <form className="form-signin">
                 { this.state.isLoginFail && <div className="alert alert-warning">Invalid Credentials</div> }
@@ -30,9 +28,6 @@ class LoginComponent extends Component {
                 <label htmlFor="inputPassword" className="sr-only">Password</label>
                 <input type="password" name="password" onChange={ this.handleChange } className="form-control" placeholder="Password" required/>
 
-
-                {/*User Name: <input value={ this.state.username } type="text" name="username" onChange={ this.handleChange }/>*/ }
-                {/*Password: <input value={ this.state.password } type="password" name="password" onChange={ this.handleChange }/>*/ }
                 <button className="btn btn-lg btn-primary btn-block mt-3" onClick={ this.loginClick }>Login</button>
              </form>
           </div>

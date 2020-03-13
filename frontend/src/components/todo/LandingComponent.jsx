@@ -35,12 +35,6 @@ class LandingComponent extends Component {
 
    getWelcomeMessage() {
       let username = AuthenticationService.getLoggedInUserName();
-      // console.log('Welcome!');
-      // HelloWorldService.executeHelloWorldService()
-      //     .then(res => this.handleSuccessResponse(res));
-
-      // HelloWorldService.executeHelloWorldBeanService()
-      //     .then(res => this.handleSuccessResponse(res));
 
       HelloWorldService.executeHelloWorldPathVariableService(username)
           .then(res => this.handleSuccessResponse(res))

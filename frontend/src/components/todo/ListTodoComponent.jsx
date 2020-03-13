@@ -14,6 +14,7 @@ class ListTodoComponent extends Component {
       };
 
       this.deleteTodoClicked = this.deleteTodoClicked.bind(this);
+      this.deleteTodoClicked = this.deleteTodoClicked.bind(this);
       this.refreshTodos = this.refreshTodos.bind(this);
    }
 
@@ -34,6 +35,18 @@ class ListTodoComponent extends Component {
    } // END componentDidMount()
 
 
+   refreshTodos() {
+      // Return Username:
+      let username = AuthenticationService.getLoggedInUserName();
+
+      TodoDataService.retrieveAllTodos(username)
+          .then(res => {
+             // console.log(res.data);
+             this.setState({
+                todos: res.data
+             })
+          });
+   } // End of refreshTodos()
    deleteTodoClicked( id ) {
       // get the username from AuthenticationService:
       let username = AuthenticationService.getLoggedInUserName();
@@ -48,18 +61,20 @@ class ListTodoComponent extends Component {
    } // End of deleteTodoClicked()
 
 
-   refreshTodos() {
-      // Return Username:
+   updateTodoClicked( id ) {
+      // get the username from AuthenticationService:
       let username = AuthenticationService.getLoggedInUserName();
+      console.log("UPDATING : " + id + " : " + username);
 
-      TodoDataService.retrieveAllTodos(username)
-          .then(res => {
-             // console.log(res.data);
-             this.setState({
-                todos: res.data
-             })
-          });
-   }
+      this.props.history.push(`/todos/${ id }`);
+
+      // TodoDataService.deleteTodoById(id, username)
+      //     .then(res => {
+      //        this.setState({ message: `You deleted, todo "${ id }"` });
+      //        this.refreshTodos();
+      //     });
+   } // End of updateTodoClicked()
+
 
    render() {
       // console.log('CALL: render()');
@@ -74,6 +89,7 @@ class ListTodoComponent extends Component {
                       <th>Target Date</th>
                       <th>Complete</th>
                       <th></th>
+                      <th></th>
                    </tr>
                 </thead>
                 <tbody>
@@ -85,9 +101,11 @@ class ListTodoComponent extends Component {
                              <td>{ todo.targetDate }</td>
                              <td>{ todo.done.toString() }</td>
                              <td>
+                                <button className="btn btn-outline-success" onClick={ () => this.updateTodoClicked(todo.id) }>Update</button>
+                             </td>
+                             <td>
                                 <button className="btn btn-outline-danger" onClick={ () => this.deleteTodoClicked(todo.id) }>Delete</button>
                              </td>
-                             {/*<td><button className="btn btn-outline-danger">&#10060;</button></td>*/ }
                           </tr>
                       )
                    }
@@ -96,6 +114,7 @@ class ListTodoComponent extends Component {
           </div>
       );
    } // render()
+
 } // END Class: ListTodoComponent
 
 
