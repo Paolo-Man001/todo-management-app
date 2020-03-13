@@ -68,12 +68,6 @@ class ListTodoComponent extends Component {
 
       // Redirect by using URL into Component (TodoComponent.jsx)
       this.props.history.push(`/todos/${ id }`);
-
-      // TodoDataService.deleteTodoById(id, username)
-      //     .then(res => {
-      //        this.setState({ message: `You deleted, todo "${ id }"` });
-      //        this.refreshTodos();
-      //     });
    } // End of updateTodoClicked()
 
 
@@ -102,10 +96,18 @@ class ListTodoComponent extends Component {
                              <td>{ todo.targetDate }</td>
                              <td>{ todo.done.toString() }</td>
                              <td>
-                                <button className="btn btn-outline-success" onClick={ () => this.updateTodoClicked(todo.id) }>Update</button>
+                                <button
+                                    className="btn btn-outline-success"
+                                    onClick={ () => this.updateTodoClicked(todo.id) }
+                                >Update
+                                </button>
                              </td>
                              <td>
-                                <button className="btn btn-outline-danger" onClick={ () => this.deleteTodoClicked(todo.id) }>Delete</button>
+                                <button
+                                    className="btn btn-outline-danger"
+                                    onClick={ () => this.deleteTodoClicked(todo.id) }
+                                >Delete
+                                </button>
                              </td>
                           </tr>
                       )
