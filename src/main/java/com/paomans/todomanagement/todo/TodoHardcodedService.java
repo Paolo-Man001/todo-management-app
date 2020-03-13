@@ -23,12 +23,13 @@ public class TodoHardcodedService {
       return todos;
    }
 
+
+   //--- DELETE by ID ---//
    public Todo deleteById(long id) {
-      Todo todo = findById(id);  // invokes finById(id)
+      Todo todo = findById(id);              // invokes finById(id)
 
-      if (todo == null) return null;         // Checks if we found nothing .... otherwise ...
-      if (todos.remove(todo)) return todo;   // if we DID find one by ID, Remove it(then return True) ....
-
+      if (todo == null) return null;         // Checks if null .... otherwise ...
+      if (todos.remove(todo)) return todo;   // if we DID find one by ID and Removed it successfully(then return True) ....
       return null;                           // ...else, return null.
    }
 
@@ -40,4 +41,5 @@ public class TodoHardcodedService {
       }
       return null;
    }
+   //--- End of DELETE by ID ---//
 }
