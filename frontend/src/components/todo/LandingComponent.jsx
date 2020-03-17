@@ -36,9 +36,17 @@ class LandingComponent extends Component {
    getWelcomeMessage() {
       let username = AuthenticationService.getLoggedInUserName();
 
-      HelloWorldService.executeHelloWorldPathVariableService(username)
-          .then(res => this.handleSuccessResponse(res))
-          .catch(error => this.handleError(error));
+      // HelloWorldService.executeHelloWorldPathVariableService(username)
+      //     .then(res => this.handleSuccessResponse(res))
+      //     .catch(error => this.handleError(error));
+
+      if ( username ) {
+         HelloWorldService.executeHelloWorldPathVariableService(username)
+             .then(res => this.handleSuccessResponse(res))
+             .catch(error => this.handleError(error));
+      } else {
+         this.setState({ helloMessage: 'Hello there!' });
+      }
    }
 
    handleSuccessResponse( res ) {
@@ -46,8 +54,6 @@ class LandingComponent extends Component {
       // console.log(res.data);
       if ( AuthenticationService.isUserLoggedIn() ) {
          this.setState({ helloMessage: res.data.message })
-      } else {
-         this.setState({ helloMessage: 'Hello there!' })
       }
    }
 

@@ -47,6 +47,8 @@ class ListTodoComponent extends Component {
              })
           });
    } // End of refreshTodos()
+
+
    deleteTodoClicked( id ) {
       // get the username from AuthenticationService:
       let username = AuthenticationService.getLoggedInUserName();
