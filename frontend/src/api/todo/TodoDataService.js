@@ -2,10 +2,16 @@ import axios from "axios";
 
 class TodoDataService {
 
-   // Get all Todos
+   // Get ALL Todos
    retrieveAllTodos( username ) {
       // console.log('Executed HelloWorldService!');
       return axios.get(`http://localhost:8081/users/${ username }/todos`);
+   }
+
+   // Get ONE Todos
+   retrieveTodo( username, id ) {
+      // console.log('Executed HelloWorldService!');
+      return axios.get(`http://localhost:8081/users/${ username }/todos/${ id }`);
    }
 
    // Delete by Id:
@@ -16,4 +22,6 @@ class TodoDataService {
 }
 
 
-export default new TodoDataService()
+export default new
+
+TodoDataService()

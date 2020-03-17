@@ -1,13 +1,16 @@
 import React, { Component } from "react";
 import moment from "moment";
 import { ErrorMessage, Field, Form, Formik } from "formik";
+import TodoDataService from "../../api/todo/TodoDataService";
+import ListTodoComponent from "./ListTodoComponent";
+import AuthenticationService from "./AuthenticationService";
 
 
 class TodoComponent extends Component {
    constructor( props ) {
       super(props);
       this.state = {
-         id: 1,
+         id: this.props.match.params.id,
          description: '',
          targetDate: moment(new Date()).format('YYYY-MM-DD')
       };
@@ -15,6 +18,13 @@ class TodoComponent extends Component {
       this.validate = this.validate.bind(this);
    }
 
+
+   // Invoke TodoDataService in this life-cycle method:
+   componentDidMount() {
+      let username = AuthenticationService.getLoggedInUserName();
+      TodoDataService.retrieveTodo(username, this.state.id)
+          .then(res => console.log(res));
+   }
 
    validate( values ) {
       let errors = {};
