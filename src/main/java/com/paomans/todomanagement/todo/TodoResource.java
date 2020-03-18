@@ -47,6 +47,9 @@ public class TodoResource {
                                           @PathVariable long id,
                                           @RequestBody Todo todo) { // Gets the update thru the req. body
       Todo todoUpdated = todoService.save(todo);
+
+      // We can just return TodoObject as Return-Type,
+      // but ResponseEntity<> allows us to return more - such as HttpStatus etc.
       return new ResponseEntity<Todo>(todo, HttpStatus.OK);
    }
 
