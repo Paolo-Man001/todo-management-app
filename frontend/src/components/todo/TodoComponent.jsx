@@ -23,7 +23,10 @@ class TodoComponent extends Component {
    componentDidMount() {
       let username = AuthenticationService.getLoggedInUserName();
       TodoDataService.retrieveTodo(username, this.state.id)
-          .then(res => console.log(res));
+          .then(res => this.setState({
+             description: res.data.description,
+             targetDate: moment(res.data.targetDate).format('YYYY-MM-DD')
+          }));
    }
 
    validate( values ) {
@@ -49,7 +52,7 @@ class TodoComponent extends Component {
       return (
           <div>
              <h1>Todo</h1>
-             {/*Todo Component for id - { this.props.match.params.id }*/ }
+             {/*Todos Component for id - { this.props.match.params.id }*/ }
              <div className="container">
                 <Formik
                     initialValues={ { description, targetDate } } // This is required for us to assign the input data
@@ -57,11 +60,14 @@ class TodoComponent extends Component {
                     validate={ this.validate }
                     validateOnChange={ false }
                     validateOnBlur={ false }
+                    /* This is important to set to 'true', so if an item's selected the form will re-initialize displaying the selected value */
+                    enableReinitialize={ true }
                 >
                    { ( props ) => (
                        <Form>
                           <ErrorMessage name="description" component="div" className="alert alert-warning"/>
                           <ErrorMessage name="targetDate" component="div" className="alert alert-warning"/>
+
                           <fieldset className="form-group">
                              <label htmlFor="description" className="float-left">Description</label>
                              <Field className="form-control" type="text" id="description" name="description"/>
