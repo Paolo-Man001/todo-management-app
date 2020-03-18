@@ -24,6 +24,18 @@ public class TodoHardcodedService {
    }
 
 
+   //--- Save
+   public Todo save(Todo todo) {
+      if (todo.getId() == -1) { // means
+         todo.setId(++idCounter);
+         todos.add(todo);
+      } else {
+         deleteById(todo.getId());
+         todos.add(todo);
+      }
+      return todo;
+   }
+
    //--- DELETE by ID ---//
    public Todo deleteById(long id) {
       Todo todo = findById(id);              // invokes finById(id)
