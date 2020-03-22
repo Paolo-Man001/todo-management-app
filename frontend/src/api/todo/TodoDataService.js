@@ -15,9 +15,15 @@ class TodoDataService {
    }
 
    // Delete by Id:
-   deleteTodoById( id, username ) {
+   deleteTodoById( username, id ) {
       // console.log('Executed HelloWorldService!');
       return axios.delete(`http://localhost:8081/users/${ username }/todos/${ id }`);
+   }
+
+   // Update by Id:
+   updateTodo( username, id, todo ) {
+      // console.log('Executed HelloWorldService!');
+      return axios.put(`http://localhost:8081/users/${ username }/todos/${ id }`, todo);
    }
 }
 

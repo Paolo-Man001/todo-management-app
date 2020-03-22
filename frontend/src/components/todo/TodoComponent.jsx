@@ -20,6 +20,9 @@ class TodoComponent extends Component {
 
    // Invoke TodoDataService in this life-cycle method:
    componentDidMount() {
+      // if ( this.state.id === -1 ) {
+      //    return;
+      // }
       let username = AuthenticationService.getLoggedInUserName();
       TodoDataService.retrieveTodo(username, this.state.id)
           .then(res => this.setState({
@@ -41,7 +44,12 @@ class TodoComponent extends Component {
    }
 
    onSubmit( values ) {
-
+      let username = AuthenticationService.getLoggedInUserName();
+      TodoDataService.updateTodo(username, this.state.id, {
+         id: this.state.id,
+         description: values.description,
+         targetDate: values.targetDate
+      });
       console.log(values);
    }
 
@@ -75,7 +83,7 @@ class TodoComponent extends Component {
                              <label htmlFor="targetDate" className="float-left">Target Date</label>
                              <Field className="form-control" type="date" id="targetDate" name="targetDate"/>
                           </fieldset>
-                          <button className="btn btn-lg btn-primary" type="submit">Save</button>
+                          <button className="btn btn-lg btn-primary float-left" type="submit">Save</button>
                        </Form>
                    ) }
                 </Formik>

@@ -1,20 +1,19 @@
 import React, { Component } from "react";
 import TodoDataService from "../../api/todo/TodoDataService";
 import AuthenticationService from "./AuthenticationService";
+import moment from "moment";
 
 class ListTodoComponent extends Component {
    constructor( props ) {
       // console.log('CALL: constructor()');
       super(props);
       this.state = {
-
-         todos:
-             [],
+         todos: [],
          message: ''
       };
 
       this.deleteTodoClicked = this.deleteTodoClicked.bind(this);
-      this.deleteTodoClicked = this.deleteTodoClicked.bind(this);
+      this.updateTodoClicked = this.updateTodoClicked.bind(this);
       this.refreshTodos = this.refreshTodos.bind(this);
    }
 
@@ -42,9 +41,7 @@ class ListTodoComponent extends Component {
       TodoDataService.retrieveAllTodos(username)
           .then(res => {
              // console.log(res.data);
-             this.setState({
-                todos: res.data
-             })
+             this.setState({ todos: res.data })
           });
    } // End of refreshTodos()
 
@@ -54,7 +51,7 @@ class ListTodoComponent extends Component {
       let username = AuthenticationService.getLoggedInUserName();
       // console.log(id + ":" + username);
 
-      TodoDataService.deleteTodoById(id, username)
+      TodoDataService.deleteTodoById(username, id)
           .then(res => {
              this.setState({ message: `You deleted, todo "${ id }"` });
              this.refreshTodos();
@@ -95,7 +92,7 @@ class ListTodoComponent extends Component {
                       (todo =>
                           <tr key={ `10${ todo.id }` }>
                              <td>{ todo.description }</td>
-                             <td>{ todo.targetDate }</td>
+                             <td>{moment(todo.targetDate).format('YYYY-MM-DD')}</td>
                              <td>{ todo.done.toString() }</td>
                              <td>
                                 <button
@@ -119,7 +116,6 @@ class ListTodoComponent extends Component {
           </div>
       );
    } // render()
-
 } // END Class: ListTodoComponent
 
 
