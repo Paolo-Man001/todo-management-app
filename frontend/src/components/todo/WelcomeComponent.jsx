@@ -10,7 +10,7 @@ class WelcomeComponent extends Component {
       return (
           <div>
              <h1>Welcome, { username }.</h1><br/>
-             You can manage your Todos <Link to={ "/todo" }>here</Link>.
+             You can manage your Todos <Link to={ "/todos" }>here</Link>.
           </div>
       );
    }

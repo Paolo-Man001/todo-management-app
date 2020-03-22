@@ -92,7 +92,7 @@ class ListTodoComponent extends Component {
                       (todo =>
                           <tr key={ `10${ todo.id }` }>
                              <td>{ todo.description }</td>
-                             <td>{moment(todo.targetDate).format('YYYY-MM-DD')}</td>
+                             <td>{ moment(todo.targetDate).format('DD-MM-YYYY') }</td>
                              <td>{ todo.done.toString() }</td>
                              <td>
                                 <button

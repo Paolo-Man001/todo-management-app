@@ -37,7 +37,8 @@ class TodoComponent extends Component {
          errors.description = 'Your todo must not be blank and at least 5 Characters long.';
       }
 
-      if ( !moment(values.targetDate).isValid() || moment(values.targetDate).isBefore(moment()) ) {
+      if ( !moment(values.targetDate).isValid() ||
+          moment(values.targetDate).isBefore(moment().subtract(1, 'day')) ) {
          errors.targetDate = 'Please enter a valid target date.';
       }
       return errors;
@@ -49,7 +50,8 @@ class TodoComponent extends Component {
          id: this.state.id,
          description: values.description,
          targetDate: values.targetDate
-      });
+      }).then(() => this.props.history.push('/todos'));  // Redirect back to ListTodoComponent.jsx
+
       console.log(values);
    }
 
