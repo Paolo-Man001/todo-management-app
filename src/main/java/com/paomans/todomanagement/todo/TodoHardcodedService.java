@@ -26,13 +26,12 @@ public class TodoHardcodedService {
 
    //--- Save
    public Todo save(Todo todo) {
-      if (todo.getId() == -1) { // means
+      if (todo.getId() == -1 || todo.getId() == 0) { // By default the value of getId() is  zero
          todo.setId(++idCounter);
-         todos.add(todo);
       } else {
-         deleteById(todo.getId());
-         todos.add(todo);
+         deleteById(todo.getId());  // invokes the method below
       }
+      todos.add(todo);
       return todo;
    }
 
