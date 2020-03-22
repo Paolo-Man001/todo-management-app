@@ -38,9 +38,9 @@ public class TodoResource {
                                           @PathVariable long id) {
       Todo todo = todoService.deleteById(id);
       if (todo != null) {
-         return ResponseEntity.noContent().build();
+         return ResponseEntity.noContent().build();   // '.noContent()' is the Response-Status IF delete was successful
       }
-      return ResponseEntity.notFound().build();
+      return ResponseEntity.notFound().build(); // '.notFound()' is the Response-Status IF delete failed
    }
 
    // PUT: Update an Entry:
@@ -68,6 +68,6 @@ public class TodoResource {
       URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri()
               .path("/{id}").buildAndExpand(createdTodo.getId()).toUri();
 
-      return ResponseEntity.created(uri).build();
+      return ResponseEntity.created(uri).build();  // '.created()' is the Response-Status
    }
 }
