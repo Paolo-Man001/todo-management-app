@@ -14,25 +14,21 @@ import TodoComponent from "./TodoComponent";
 class TodoApp extends Component {
    render() {
       return (
-          <div className={ "TodoApp" }>
-             <Router>
-                <>
-                   <HeaderWithRouter/>
-                   <main role="main" className="container todo-feature flex-shrink-0 ">
-                      <Switch>
-                         <Route path="/" exact component={ LandingComponent }/>
-                         <Route path="/login" component={ LoginComponent }/>
-                         <AuthenticatedRoute path="/welcome/:name" component={ WelcomeComponent }/>
-                         <AuthenticatedRoute path="/todos/:id" component={ TodoComponent }/>
-                         <AuthenticatedRoute path="/todos" component={ ListTodoComponent }/>
-                         <AuthenticatedRoute path="/logout" component={ LogoutComponent }/>
-                         <Route component={ ErrorComponent }/>
-                      </Switch>
-                   </main>
-                   <FooterComponent/>
-                </>
-             </Router>
-          </div>
+          <Router>
+             <HeaderWithRouter/>
+             <main role="main" className="container todo-feature">
+                <Switch>
+                   <Route path="/" exact component={ LandingComponent }/>
+                   <Route path="/login" component={ LoginComponent }/>
+                   <AuthenticatedRoute path="/welcome/:name" component={ WelcomeComponent }/>
+                   <AuthenticatedRoute path="/todos/:id" component={ TodoComponent }/>
+                   <AuthenticatedRoute path="/todos" component={ ListTodoComponent }/>
+                   <AuthenticatedRoute path="/logout" component={ LogoutComponent }/>
+                   <Route component={ ErrorComponent }/>
+                </Switch>
+             </main>
+             <FooterComponent/>
+          </Router>
       );
    }
 }  // END Component-Parent: TodoApp

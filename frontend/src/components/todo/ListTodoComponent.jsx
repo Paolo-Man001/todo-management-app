@@ -67,8 +67,9 @@ class ListTodoComponent extends Component {
    } // End of updateTodoClicked()
 
    addTodoClick() {
-      this.props.history.push('/todos/-1');
-      console.log('Adding New Todo!');
+      const negativeId = -1;
+      this.props.history.push(`/todos/${negativeId}`);
+      // console.log('Adding a New TodoEntry!');
    }
 
    render() {

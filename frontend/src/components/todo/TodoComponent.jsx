@@ -56,7 +56,7 @@ class TodoComponent extends Component {
 
       // if id is -1 ,  it's not 'retrieveTodo', just a blank for adding a new one.
       if ( this.state.id === -1 ) {
-         TodoDataService.createTodo(username, todoDetails)
+         TodoDataService.createTodo(username, this.state.id,todoDetails)
              .then(() => this.props.history.push('/todos'));  // Redirect back to ListTodoComponent.jsx
       } else {
          TodoDataService.updateTodo(username, this.state.id, todoDetails)
