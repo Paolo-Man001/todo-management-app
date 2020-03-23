@@ -25,6 +25,12 @@ class TodoDataService {
       // console.log('Executed HelloWorldService!');
       return axios.put(`http://localhost:8081/users/${ username }/todos/${ id }`, todo);
    }
+
+   // Create/Add new Entry :
+   createTodo( username, todo ) {
+      // console.log('Executed HelloWorldService!');
+      return axios.post(`http://localhost:8081/users/${ username }/todos/`, todo);
+   }
 }
 
 

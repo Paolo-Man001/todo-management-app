@@ -12,9 +12,10 @@ class ListTodoComponent extends Component {
          message: ''
       };
 
+      this.refreshTodos = this.refreshTodos.bind(this);
       this.deleteTodoClicked = this.deleteTodoClicked.bind(this);
       this.updateTodoClicked = this.updateTodoClicked.bind(this);
-      this.refreshTodos = this.refreshTodos.bind(this);
+      this.addTodoClick = this.addTodoClick.bind(this);
    }
 
    //-- React lifecycle methods: --
@@ -61,14 +62,14 @@ class ListTodoComponent extends Component {
 
 
    updateTodoClicked( id ) {
-      // get the username from AuthenticationService:
-      // let username = AuthenticationService.getLoggedInUserName();
-      // console.log("UPDATING : " + id + " : " + username);
-
       // Redirect by using URL into Component (TodoComponent.jsx)
       this.props.history.push(`/todos/${ id }`);
    } // End of updateTodoClicked()
 
+   addTodoClick() {
+      this.props.history.push('/todos/-1');
+      console.log('Adding New Todo!');
+   }
 
    render() {
       // console.log('CALL: render()');
@@ -113,9 +114,18 @@ class ListTodoComponent extends Component {
                    }
                 </tbody>
              </table>
+             {/*--- Add New Entry Button ---*/}
+             <div className="row m-0">
+                <button
+                    className="btn btn-large btn-success"
+                    onClick={this.addTodoClick}
+                >Add New</button>
+             </div>
+
           </div>
       );
    } // render()
+
 } // END Class: ListTodoComponent
 
 

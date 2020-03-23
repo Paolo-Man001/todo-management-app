@@ -20,9 +20,11 @@ class TodoComponent extends Component {
 
    // Invoke TodoDataService in this life-cycle method:
    componentDidMount() {
-      // if ( this.state.id === -1 ) {
-      //    return;
-      // }
+      // if id is -1 ,  it's not 'retrieveTodo', just a blank for adding a new one.
+      if ( this.state.id === -1 ) {
+         return;
+      }
+
       let username = AuthenticationService.getLoggedInUserName();
       TodoDataService.retrieveTodo(username, this.state.id)
           .then(res => this.setState({
@@ -46,13 +48,22 @@ class TodoComponent extends Component {
 
    onSubmit( values ) {
       let username = AuthenticationService.getLoggedInUserName();
-      TodoDataService.updateTodo(username, this.state.id, {
+      let todoDetails = {
          id: this.state.id,
          description: values.description,
          targetDate: values.targetDate
-      }).then(() => this.props.history.push('/todos'));  // Redirect back to ListTodoComponent.jsx
+      };
 
-      console.log(values);
+      // if id is -1 ,  it's not 'retrieveTodo', just a blank for adding a new one.
+      if ( this.state.id === -1 ) {
+         TodoDataService.createTodo(username, todoDetails)
+             .then(() => this.props.history.push('/todos'));  // Redirect back to ListTodoComponent.jsx
+      } else {
+         TodoDataService.updateTodo(username, this.state.id, todoDetails)
+             .then(() => this.props.history.push('/todos'));  // Redirect back to ListTodoComponent.jsx
+      }
+
+      // console.log(values);
    }
 
    render() {
