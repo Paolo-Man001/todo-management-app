@@ -1,7 +1,6 @@
 import axios from "axios";
 
 class TodoDataService {
-
    // Get ALL Todos
    retrieveAllTodos( username ) {
       // console.log('Executed HelloWorldService!');
@@ -34,6 +33,4 @@ class TodoDataService {
 }
 
 
-export default new
-
-TodoDataService()
+export default new TodoDataService()
