@@ -35,8 +35,10 @@ class TodoComponent extends Component {
 
    validate( values ) {
       let errors = {};
-      if ( values.description.length < 5 ) {
-         errors.description = 'Your todo must not be blank and at least 5 Characters long.';
+      if ( !values.description ) {  // if description is left blank
+         errors.description = 'Your todo must not be blank.'
+      } else if ( values.description.length < 5 ) {
+         errors.description = 'Your todo must be at least 5 Characters long.';
       }
 
       if ( !moment(values.targetDate).isValid() ||
@@ -54,15 +56,14 @@ class TodoComponent extends Component {
          targetDate: values.targetDate
       };
 
-      // if id is -1 ,  it's not 'retrieveTodo', just a blank for adding a new one.
+      // If id is -1 ,  it's not 'retrieveTodo', just a blank for adding a new one.
       if ( this.state.id === -1 ) {
-         TodoDataService.createTodo(username, this.state.id,todoDetails)
+         TodoDataService.createTodo(username, this.state.id, todoDetails)
              .then(() => this.props.history.push('/todos'));  // Redirect back to ListTodoComponent.jsx
       } else {
          TodoDataService.updateTodo(username, this.state.id, todoDetails)
              .then(() => this.props.history.push('/todos'));  // Redirect back to ListTodoComponent.jsx
       }
-
       // console.log(values);
    }
 

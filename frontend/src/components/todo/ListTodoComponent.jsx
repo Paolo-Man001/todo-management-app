@@ -9,7 +9,7 @@ class ListTodoComponent extends Component {
       super(props);
       this.state = {
          todos: [],
-         message: ''
+         message: null
       };
 
       this.refreshTodos = this.refreshTodos.bind(this);
@@ -38,7 +38,6 @@ class ListTodoComponent extends Component {
    refreshTodos() {
       // Return Username:
       let username = AuthenticationService.getLoggedInUserName();
-
       TodoDataService.retrieveAllTodos(username)
           .then(res => {
              // console.log(res.data);
@@ -46,20 +45,16 @@ class ListTodoComponent extends Component {
           });
    } // End of refreshTodos()
 
-
    deleteTodoClicked( id ) {
       // get the username from AuthenticationService:
       let username = AuthenticationService.getLoggedInUserName();
       // console.log(id + ":" + username);
-
       TodoDataService.deleteTodoById(username, id)
           .then(res => {
              this.setState({ message: `You deleted, todo "${ id }"` });
              this.refreshTodos();
           });
-
    } // End of deleteTodoClicked()
-
 
    updateTodoClicked( id ) {
       // Redirect by using URL into Component (TodoComponent.jsx)
@@ -68,7 +63,7 @@ class ListTodoComponent extends Component {
 
    addTodoClick() {
       const negativeId = -1;
-      this.props.history.push(`/todos/${negativeId}`);
+      this.props.history.push(`/todos/${ negativeId }`);
       // console.log('Adding a New TodoEntry!');
    }
 
@@ -115,18 +110,18 @@ class ListTodoComponent extends Component {
                    }
                 </tbody>
              </table>
-             {/*--- Add New Entry Button ---*/}
+             {/*--- Add New Entry Button ---*/ }
              <div className="row m-0">
                 <button
                     className="btn btn-large btn-success"
-                    onClick={this.addTodoClick}
-                >Add New</button>
+                    onClick={ this.addTodoClick }
+                >Add New
+                </button>
              </div>
 
           </div>
       );
    } // render()
-
 } // END Class: ListTodoComponent
 
 
