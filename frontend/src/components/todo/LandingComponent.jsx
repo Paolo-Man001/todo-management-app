@@ -15,6 +15,10 @@ class LandingComponent extends Component {
       this.handleError = this.handleError.bind(this);
    }
 
+   componentDidMount() {
+      this.getWelcomeMessage();
+   }
+
    render() {
 
       return (
@@ -25,9 +29,9 @@ class LandingComponent extends Component {
              <div>
 
                 { this.state.errorMessage && <div className="alert alert-danger" role="alert">{ this.state.errorMessage }</div> }
-                <button className="btn btn-primary btn-lg"
-                        onClick={ this.getWelcomeMessage }>Click for 'Hello'
-                </button>
+                {/*<button className="btn btn-primary btn-lg"*/ }
+                {/*        onClick={ this.getWelcomeMessage }>Click for 'Hello'*/ }
+                {/*</button>*/ }
              </div>
           </div>
       );
@@ -35,10 +39,6 @@ class LandingComponent extends Component {
 
    getWelcomeMessage() {
       let username = AuthenticationService.getLoggedInUserName();
-
-      // HelloWorldService.executeHelloWorldPathVariableService(username)
-      //     .then(res => this.handleSuccessResponse(res))
-      //     .catch(error => this.handleError(error));
 
       if ( username ) {
          HelloWorldService.executeHelloWorldPathVariableService(username)

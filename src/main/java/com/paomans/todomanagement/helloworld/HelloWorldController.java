@@ -28,6 +28,6 @@ public class HelloWorldController {
    @GetMapping(path = "/hello-world/path-variable/{name}")
    public HelloWorldBean helloWorldPathVariable(@PathVariable String name) {
 //      throw new RuntimeException("Runtime EXCEPTION!");
-      return new HelloWorldBean(String.format("Hello, %s", name));
+      return new HelloWorldBean(String.format("Hello, %s!", name));
    }
 }
