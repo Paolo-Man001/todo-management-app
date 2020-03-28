@@ -1,4 +1,4 @@
-package com.paomans.todomanagement;
+package com.paomans.todomanagement.basic;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;

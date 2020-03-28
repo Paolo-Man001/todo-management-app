@@ -17,7 +17,7 @@ class AuthenticationService {
       this.authUser = username;
       // console.log('registerSuccessfulLogin');
       sessionStorage.setItem('authenticatedUser', username);
-      this.setUpAxiosInerceptors(basicAuthHeader);
+      this.setUpAxiosInerceptor(basicAuthHeader);
    }
 
 
@@ -39,7 +39,7 @@ class AuthenticationService {
    }
 
    //---- axios Interceptor
-   setUpAxiosInerceptors( basicAuthHeader ) {
+   setUpAxiosInerceptor( basicAuthHeader ) {
       axios.interceptors.request.use(
           ( config ) => {
              if ( this.isUserLoggedIn() ) {
