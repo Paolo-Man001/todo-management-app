@@ -58,8 +58,15 @@ class LandingComponent extends Component {
    }
 
    handleError( error ) {
-      // console.log(error.response.data.message);
-      this.setState({ errorMessage: error.response.data.message })
+      console.log(error.response);
+      let errorMessage = '';
+      if ( error.message ) {
+         errorMessage += error.message;
+      }
+      if ( error.response && error.response.data ) {
+         errorMessage += error.response.data.message;
+      }
+      this.setState({ errorMessage: errorMessage });
    }
 }  // END Component-Child: LandingComponent
 
