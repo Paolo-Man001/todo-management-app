@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 // @RestController Annotations will tell SpringBoot what this Class's role.
 // @CrossOrigin allows programmatically "proxy" 4200 for SpringBoot. Alt-way is set proxy inside React
 @RestController
-@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
+@CrossOrigin(origins = "http://localhost:4200")
 public class HelloWorldController {
    // GET
    // URI : "/hello-world"

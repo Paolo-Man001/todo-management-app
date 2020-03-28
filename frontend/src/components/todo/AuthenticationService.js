@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 /*
 * Helper Services are NOT React Components, that's we we don't export as a Class Component.
 * Helper Services are exported as Instance of the Class - Object.
@@ -14,6 +16,7 @@ class AuthenticationService {
       this.authUser = username;
       // console.log('registerSuccessfulLogin');
       sessionStorage.setItem('authenticatedUser', username);
+      this.setUpAxiosInerceptors();
    }
 
 
@@ -33,6 +36,24 @@ class AuthenticationService {
       if ( user === null ) return '';
       return user;
    }
+
+   //---- axios Interceptor
+   setUpAxiosInerceptors() {
+      let username = 'john doe';
+      let password = 'password';
+
+      let basicAuthHeader = 'Basic ' + window.btoa(username + ":" + password);
+
+      axios.interceptors.request.use(
+          ( config ) => {
+             if ( this.isUserLoggedIn() ) {
+                config.headers.authorization = basicAuthHeader;
+             }
+             return config;
+          }
+      )
+   }
+
 }
 
 
