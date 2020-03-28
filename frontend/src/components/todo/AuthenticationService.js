@@ -12,11 +12,12 @@ class AuthenticationService {
 
    // CALL when user loginClick() :
    registerSuccessfulLogin( username, password ) {
+      let basicAuthHeader = 'Basic ' + window.btoa(username + ":" + password);
       // Assign the username to instance-variable authUser
       this.authUser = username;
       // console.log('registerSuccessfulLogin');
       sessionStorage.setItem('authenticatedUser', username);
-      this.setUpAxiosInerceptors();
+      this.setUpAxiosInerceptors(basicAuthHeader);
    }
 
 
@@ -38,12 +39,7 @@ class AuthenticationService {
    }
 
    //---- axios Interceptor
-   setUpAxiosInerceptors() {
-      let username = 'john doe';
-      let password = 'password';
-
-      let basicAuthHeader = 'Basic ' + window.btoa(username + ":" + password);
-
+   setUpAxiosInerceptors( basicAuthHeader ) {
       axios.interceptors.request.use(
           ( config ) => {
              if ( this.isUserLoggedIn() ) {

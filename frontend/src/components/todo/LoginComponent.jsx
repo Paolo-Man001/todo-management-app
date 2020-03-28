@@ -11,7 +11,6 @@ class LoginComponent extends Component {
          showSuccessMessage: false
       };
       // this.handlePasswordChange = this.handlePasswordChange.bind(this);
-
       this.handleChange = this.handleChange.bind(this);
       this.loginClick = this.loginClick.bind(this);
    }  // END Constructor
@@ -45,17 +44,13 @@ class LoginComponent extends Component {
    } // END Method: handleChange()
 
    loginClick() {
-      // DEFAULT HARDCODED AUTH = username: "john doe" , password: "password"
-      // this.setState({ showSuccessMessage: true });
-
+      // HARD-CODED validation/authentication :
       if ( this.state.username === "john doe" && this.state.password === "password" ) {
          // Authentication service:
          AuthenticationService.registerSuccessfulLogin(this.state.username, this.state.password);
-
          // username has to be added for the <Route> Path Param (path="/welcome/:name")
          this.props.history.push(`/welcome/${ this.state.username }`);
 
-         // this.setState({ isLoginFail: false });
       } else {
          this.setState({ isLoginFail: true });
          this.setState({ showSuccessMessage: false });
