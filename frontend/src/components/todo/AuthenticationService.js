@@ -6,20 +6,35 @@ import axios from 'axios';
 * */
 
 class AuthenticationService {
-   constructor( authUser ) {
-      this.authUser = authUser;
+   createBasicAuthToken( username, password ) {
+      return 'Basic ' + window.btoa(username + ":" + password);
+   }
+
+   executeBasicAuthenticationService( username, password ) {
+      // sessionStorage.setItem('authenticatedUser', username);
+      return axios.get('http://localhost:8081/basicauth',
+          { headers: { authorization: this.createBasicAuthToken(username, password) } })
    }
 
    // CALL when user loginClick() :
    registerSuccessfulLogin( username, password ) {
-      let basicAuthHeader = 'Basic ' + window.btoa(username + ":" + password);
-      // Assign the username to instance-variable authUser
-      this.authUser = username;
+      // this.authUser = username;  // Assign the username to instance-variable authUser
       // console.log('registerSuccessfulLogin');
       sessionStorage.setItem('authenticatedUser', username);
-      this.setUpAxiosInerceptor(basicAuthHeader);
+
+      this.setUpAxiosInterceptor(this.createBasicAuthToken(username, password));
    }
 
+   //---- Axios Interceptor --> 'Request' Intercept
+   setUpAxiosInterceptor( basicAuthHeader ) {
+      axios.interceptors.request.use(
+          ( config ) => {
+             if ( this.isUserLoggedIn() ) {
+                config.headers.authorization = basicAuthHeader;
+             }
+             return config;
+          });
+   }
 
    // CALL from Navbar Logout :
    logout() {
@@ -36,18 +51,6 @@ class AuthenticationService {
       let user = sessionStorage.getItem('authenticatedUser');
       if ( user === null ) return '';
       return user;
-   }
-
-   //---- axios Interceptor
-   setUpAxiosInerceptor( basicAuthHeader ) {
-      axios.interceptors.request.use(
-          ( config ) => {
-             if ( this.isUserLoggedIn() ) {
-                config.headers.authorization = basicAuthHeader;
-             }
-             return config;
-          }
-      )
    }
 
 }

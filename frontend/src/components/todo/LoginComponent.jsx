@@ -5,7 +5,7 @@ class LoginComponent extends Component {
    constructor( props ) {
       super(props);
       this.state = {
-         username: 'john doe',
+         username: 'username',
          password: '',
          isLoginFail: false,
          showSuccessMessage: false
@@ -14,6 +14,47 @@ class LoginComponent extends Component {
       this.handleChange = this.handleChange.bind(this);
       this.loginClick = this.loginClick.bind(this);
    }  // END Constructor
+
+
+   //---- METHODS:
+   handleChange( event ) {
+      // console.log(this.state);
+      this.setState({
+         /* 'event.target.name' refers to the attribute 'name' that is assigned to "username / password"
+          [event.target.name] MUST be in a bracket, to make it an object-member-variable(key)*/
+         [event.target.name]: event.target.value
+      })
+   } // END Method: handleChange()
+
+   loginClick() {
+      // --- HARD-CODED validation/authentication :
+      if ( this.state.username === 'john doe' && this.state.password === 'password' ) {
+
+         // console.log(basicAuthService);
+         // AuthenticationService.executeBasicAuthenticationService(this.state.username, this.state.password)
+         //     .then(() => {
+         //        AuthenticationService.registerSuccessfulLogin(this.state.username, this.state.password);
+         //        // // username has to be added for the <Route> Path Param (path="/welcome/:name")
+         //        this.props.history.push(`/welcome/${ this.state.username }`);
+         //     })
+         //     .catch(( err ) => {
+         //        console.log(err);
+         //        this.setState({ isLoginFail: true });
+         //        this.setState({ showSuccessMessage: false });
+         //     })
+
+         // let basicAuthService = AuthenticationService.executeBasicAuthenticationService(this.state.username, this.state.password);
+         // if ( basicAuthService ) {
+         AuthenticationService.registerSuccessfulLogin(this.state.username, this.state.password);
+         // // username has to be added for the <Route> Path Param (path="/welcome/:name")
+         this.props.history.push(`/welcome/${ this.state.username }`);
+      } else {
+         this.setState({ isLoginFail: true });
+         this.setState({ showSuccessMessage: false });
+      }
+
+   } // END Method: loginClick()
+
 
    render() {
       return (
@@ -33,29 +74,6 @@ class LoginComponent extends Component {
       );
    }
 
-   //---- METHODS:
-   handleChange( event ) {
-      // console.log(this.state);
-      this.setState({
-         /* 'event.target.name' refers to the attribute 'name' that is assigned to "username / password"
-          [event.target.name] MUST be in a bracket, to make it an object-member-variable(key)*/
-         [event.target.name]: event.target.value
-      })
-   } // END Method: handleChange()
-
-   loginClick() {
-      // HARD-CODED validation/authentication :
-      if ( this.state.username === "john doe" && this.state.password === "password" ) {
-         // Authentication service:
-         AuthenticationService.registerSuccessfulLogin(this.state.username, this.state.password);
-         // username has to be added for the <Route> Path Param (path="/welcome/:name")
-         this.props.history.push(`/welcome/${ this.state.username }`);
-
-      } else {
-         this.setState({ isLoginFail: true });
-         this.setState({ showSuccessMessage: false });
-      }
-   } // END Method: loginClick()
 }// END Component-Child:  loginComponent
 
 

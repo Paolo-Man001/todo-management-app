@@ -1,4 +1,4 @@
-package com.paomans.todomanagement.basic;
+package com.paomans.todomanagement.basic.auth;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -16,9 +16,11 @@ public class SpringSecurityConfigurationBasicAuth extends WebSecurityConfigurerA
               .csrf().disable()
               .authorizeRequests()
               .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-              .anyRequest().authenticated()
+              .anyRequest()
+              .authenticated()
               .and()
-              .formLogin().disable()
+//              .formLogin().disable()
               .httpBasic();
+//      http.cors();
    }
 }

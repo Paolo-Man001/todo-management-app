@@ -15,7 +15,7 @@ class HeaderComponent extends Component {
              </button>
              <div className="collapse navbar-collapse" id="navbarNav">
                 <ul className="navbar-nav mr-auto">
-                   { isUserLoggedIn && <li className="nav-item"><Link className="nav-link" to={ `/welcome/${AuthenticationService.authUser}` }>Home</Link></li> }
+                   { isUserLoggedIn && <li className="nav-item"><Link className="nav-link" to={ `/welcome/${AuthenticationService.getLoggedInUserName()}` }>Home</Link></li> }
                    { isUserLoggedIn && <li className="nav-item"><Link className="nav-link" to="/todos">Todos</Link></li> }
                 </ul>
                 <ul className="navbar-nav">

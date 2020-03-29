@@ -1,4 +1,4 @@
-package com.paomans.todomanagement.basic;
+package com.paomans.todomanagement.basic.auth;
 
 public class AuthenticationBean {
    private String message;
@@ -17,7 +17,7 @@ public class AuthenticationBean {
 
    @Override
    public String toString() {
-      return "AuthenticationBean{" +
+      return "HelloWorldBean{" +
               "message='" + message + '\'' +
               '}';
    }

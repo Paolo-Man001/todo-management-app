@@ -1,4 +1,4 @@
-package com.paomans.todomanagement.basic;
+package com.paomans.todomanagement.basic.auth;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +12,6 @@ public class BasicAuthenticationController {
    @GetMapping(path = "/basicauth")
    public AuthenticationBean helloWorldBean() {
 //      throw new RuntimeException('Sorry an Error has occurred!');
-      return new AuthenticationBean("You are now, Authenticated!");
+      return new AuthenticationBean("You are authenticated!");
    }
 }

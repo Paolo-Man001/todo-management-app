@@ -18,7 +18,6 @@ class TodoApp extends Component {
              <HeaderWithRouter/>
              <main role="main" className="container todo-feature">
                 <Switch>
-                   {/*<Route path="/" exact component={ LoginComponent }/>*/}
                    <Route path="/" exact component={ LandingComponent }/>
                    <Route path="/login" component={ LoginComponent }/>
                    <AuthenticatedRoute path="/welcome/:name" component={ WelcomeComponent }/>
