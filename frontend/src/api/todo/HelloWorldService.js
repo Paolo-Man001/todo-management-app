@@ -16,6 +16,7 @@ class HelloWorldService {
    executeHelloWorldPathVariableService( name ) {
 
       return axios.get(`http://localhost:8081/hello-world/path-variable/${ name }`
+          // ,
           // {
           //    headers: {
           //       authorization: basicAuthHeader

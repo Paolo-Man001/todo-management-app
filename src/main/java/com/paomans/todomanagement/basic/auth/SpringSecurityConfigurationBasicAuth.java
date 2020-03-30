@@ -16,11 +16,10 @@ public class SpringSecurityConfigurationBasicAuth extends WebSecurityConfigurerA
               .csrf().disable()
               .authorizeRequests()
               .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-              .anyRequest()
-              .authenticated()
-              .and()
-//              .formLogin().disable()
-              .httpBasic();
+                    .anyRequest().authenticated()
+                    .and()
+      //              .formLogin().disable()
+                 .httpBasic();
 //      http.cors();
    }
 }

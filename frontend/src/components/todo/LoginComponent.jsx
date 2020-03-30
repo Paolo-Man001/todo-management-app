@@ -5,7 +5,7 @@ class LoginComponent extends Component {
    constructor( props ) {
       super(props);
       this.state = {
-         username: 'username',
+         username: 'john doe',
          password: '',
          isLoginFail: false,
          showSuccessMessage: false
@@ -28,31 +28,50 @@ class LoginComponent extends Component {
 
    loginClick() {
       // --- HARD-CODED validation/authentication :
-      if ( this.state.username === 'john doe' && this.state.password === 'password' ) {
+      // if ( this.state.username === 'john doe' && this.state.password === 'password' ) {
 
-         // console.log(basicAuthService);
-         // AuthenticationService.executeBasicAuthenticationService(this.state.username, this.state.password)
-         //     .then(() => {
-         //        AuthenticationService.registerSuccessfulLogin(this.state.username, this.state.password);
-         //        // // username has to be added for the <Route> Path Param (path="/welcome/:name")
-         //        this.props.history.push(`/welcome/${ this.state.username }`);
-         //     })
-         //     .catch(( err ) => {
-         //        console.log(err);
-         //        this.setState({ isLoginFail: true });
-         //        this.setState({ showSuccessMessage: false });
-         //     })
+      // console.log(basicAuthService);
+      // AuthenticationService.executeBasicAuthenticationService(this.state.username, this.state.password)
+      //     .then(() => {
+      //        AuthenticationService.registerSuccessfulLogin(this.state.username, this.state.password);
+      //        this.props.history.push(`/welcome/${ this.state.username }`);
+      //     })
+      //     .catch(() => {
+      //        this.setState({ isLoginFail: true });
+      //        this.setState({ showSuccessMessage: false });
+      //     })
 
-         // let basicAuthService = AuthenticationService.executeBasicAuthenticationService(this.state.username, this.state.password);
-         // if ( basicAuthService ) {
-         AuthenticationService.registerSuccessfulLogin(this.state.username, this.state.password);
-         // // username has to be added for the <Route> Path Param (path="/welcome/:name")
-         this.props.history.push(`/welcome/${ this.state.username }`);
-      } else {
-         this.setState({ isLoginFail: true });
-         this.setState({ showSuccessMessage: false });
-      }
+      AuthenticationService
+      .executeBasicAuthenticationService(this.state.username, this.state.password)
+      .then(() => {
+          AuthenticationService.registerSuccessfulLogin(this.state.username,this.state.password)
+          this.props.history.push(`/welcome/${this.state.username}`)
 
+      }).catch( () =>{
+          this.setState({showSuccessMessage:false})
+          this.setState({hasLoginFailed:true})
+      })
+
+      // let execAuthCred = AuthenticationService.executeBasicAuthenticationService(this.state.username, this.state.password);
+      // if ( execAuthCred ) {
+      //    AuthenticationService.registerSuccessfulLogin(this.state.username, this.state.password);
+      //    this.props.history.push(`/welcome/${ this.state.username }`);
+      // } else {
+      //    this.setState({ isLoginFail: true });
+      //    this.setState({ showSuccessMessage: false });
+      // }
+
+
+      // Promise.resolve()
+      //     .then(() => {
+      //        // console.log(res.data);
+      //        AuthenticationService.registerSuccessfulLogin(this.state.username, this.state.password);
+      //        this.props.history.push(`/welcome/${ this.state.username }`);
+      //     })
+      //     .catch(() => {
+      //        this.setState({ isLoginFail: true });
+      //        this.setState({ showSuccessMessage: false });
+      //     });
    } // END Method: loginClick()
 
 
