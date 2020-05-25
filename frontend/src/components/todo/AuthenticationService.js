@@ -6,8 +6,9 @@ import axios from 'axios';
 * */
 
 class AuthenticationService {
+
    createBasicAuthToken( username, password ) {
-      return 'Basic ' + window.btoa(`${ username }:${ password }`);
+      return 'Basic ' + window.btoa(username + ":" + password);
    }
 
    executeBasicAuthenticationService( username, password ) {
@@ -36,7 +37,8 @@ class AuthenticationService {
                 config.headers.authorization = basicAuthHeader;
              }
              return config;
-          });
+          }
+      )
    }
 
    // CALL from Navbar Logout :
